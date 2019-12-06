@@ -1,0 +1,58 @@
+{
+    "merge_rules" : [
+      {
+        "from_branch" : "^(?!.*dev).*$",
+        "to_branch" : "master",
+        "description" : "hotfix branch(non-dev) branch to master",
+        "validation_type" : "label",
+        "mandatory_labels" : [
+          ["qa-hotfix-signoff"]
+        ],
+        "override_labels" : [
+          "admin-override"
+        ]
+      },
+      {
+        "from_branch" : "^(?!.*master).*$",
+        "to_branch" : "dev",
+        "description" : "feature branch (non-master) to dev",
+        "validation_type" : "label",
+        "mandatory_labels" : [
+          ["developer-tested"],
+          ["qa-branch-signoff"]
+        ],
+        "override_labels" : [
+          "admin-override"
+        ]
+      },
+      {
+        "from_branch" : "dev",
+        "to_branch" : "master",
+        "description" : "dev to master",
+        "validation_type" : "label",
+        "mandatory_labels" : [
+          ["qa-devtomaster-signoff"]
+        ],
+        "override_labels" : [
+          "admin-override"
+        ]
+      }
+    ],
+
+    "label_rules" : [
+      {
+        "regex" : "^qa\\-.*$",
+        "teams_whitelisted" : [ "fc-qa", "fc-admins"]
+      },
+      {
+        "regex" : "^admin\\-.*$",
+        "teams_whitelisted" : [ "fc-admins"]
+      },
+      {
+        "regex" : "^developer\\-.*$",
+        "teams_whitelisted" : [  "fc-devs", "fc-admins" ]
+      }
+    ]
+
+
+  }

@@ -2,9 +2,7 @@
 test-repo
 
 
+<dev>
+<dev-squash>
 
-
-
-
-
-adsasd
+asdsad
