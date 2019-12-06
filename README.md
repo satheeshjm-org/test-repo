@@ -2,3 +2,4 @@
 test-repo
 
 <dev>
+<dev-squash>
