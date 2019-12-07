@@ -1,28 +1,11 @@
 {
 
     "triggers" : [
-      {
+       {
         "type" : "pr_comment",
         "description" : "Freeze dev if command is sent in dev-to-master PR",
-        "command" : "^freeze$",
-        "action" : "freeze",
-        "branch" : "dev",
-
-        "validations" : [
-          {
-            "type" : "pr_branch",
-            "from_branch" : "^dev$",
-            "to_branch" : "^master$"
-          }
-        ]
-      },
-      {
-        "type" : "pr_comment",
-        "description" : "Unfreeze dev if command is sent in dev-to-master PR",
-        "command" : "^unfreeze$",
-        "action" : "unfreeze",
-        "branch" : "dev",
-
+        "commands" : ["freeze", "unfreeze"],
+        "target_branch" : "dev",
         "validations" : [
           {
             "type" : "pr_branch",
@@ -34,10 +17,8 @@
        {
         "type" : "pr_comment",
         "description" : "Freeze master in any PR ",
-        "command" : "^freeze",
-        "action" : "freeze",
-        "branch" : "master",
-
+        "commands" : ["freeze", "unfreeze"],
+        "target_branch" : "master",
         "validations" : [
           {
             "type" : "pr_branch",
