@@ -51,6 +51,6 @@
     "persistence" :
     {
       "file" : ".github/.freezer_data.json",
-      "branch" : "_freezer_sandbox"
+      "branch" : "freezer_sandbox"
     }
 }
