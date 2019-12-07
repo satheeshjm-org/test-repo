@@ -1,0 +1,41 @@
+{
+
+    "triggers" : [
+      {
+        "type" : "pr_comment",
+        "description" : "Freeze dev if command is sent in dev-to-master PR",
+        "command" : "^freeze$",
+        "action" : "freeze",
+        "branch" : "dev",
+
+        "validations" : [
+          {
+            "type" : "pr_branch",
+            "from_branch" : "^dev$",
+            "to_branch" : "^master$"
+          }
+        ]
+      },
+      {
+        "type" : "pr_comment",
+        "description" : "Unfreeze dev if command is sent in dev-to-master PR",
+        "command" : "^unfreeze$",
+        "action" : "unfreeze",
+        "branch" : "dev",
+
+        "validations" : [
+          {
+            "type" : "pr_branch",
+            "from_branch" : "^dev$",
+            "to_branch" : "^master$"
+          }
+        ]
+      }
+    ],
+
+    "persistence" :
+    {
+      "file" : ".github/.freezer_data.json",
+      "branch" : "_freezer_sandbox"
+    }
+}
