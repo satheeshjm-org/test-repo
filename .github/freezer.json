@@ -30,12 +30,27 @@
             "to_branch" : "^master$"
           }
         ]
+      },
+       {
+        "type" : "pr_comment",
+        "description" : "Freeze master in any PR ",
+        "command" : "^freeze",
+        "action" : "freeze",
+        "branch" : "master",
+
+        "validations" : [
+          {
+            "type" : "pr_branch",
+            "from_branch" : "^.*$",
+            "to_branch" : "^.*$"
+          }
+        ]
       }
     ],
 
     "persistence" :
     {
       "file" : ".github/.freezer_data.json",
-      "branch" : "freezer_sandbox"
+      "branch" : "_freezer_sandbox"
     }
 }
