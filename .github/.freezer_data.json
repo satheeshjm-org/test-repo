@@ -1,3 +1,6 @@
 {
-  "test": true
+  "test": true,
+  "master": {
+    "status": "freeze"
+  }
 }
