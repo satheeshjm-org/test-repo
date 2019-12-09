@@ -2,9 +2,8 @@
   "test": true,
   "master": {
     "status": "freeze",
-    "frozen": true,
-    "frozen_at": "2019-12-09T20:53:42Z",
-    "unfrozen_at": null,
-    "unfrozen_by": null
+    "frozen": false,
+    "frozen_at": null,
+    "frozen_by": null
   }
 }
