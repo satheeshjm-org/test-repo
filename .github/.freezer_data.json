@@ -4,6 +4,8 @@
     "status": "freeze",
     "frozen": false,
     "frozen_at": null,
-    "frozen_by": null
+    "frozen_by": null,
+    "unfrozen_at": "2019-12-09T21:56:29Z",
+    "unfrozen_by": "SatheeshJM"
   }
 }
