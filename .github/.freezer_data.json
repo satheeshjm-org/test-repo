@@ -3,8 +3,9 @@
   "master": {
     "status": "freeze",
     "frozen": true,
-    "frozen_at": "2019-12-09T20:56:30Z",
+    "frozen_at": "2019-12-09T20:57:44Z",
     "unfrozen_at": null,
-    "unfrozen_by": null
+    "unfrozen_by": null,
+    "frozen_by": "SatheeshJM"
   }
 }
