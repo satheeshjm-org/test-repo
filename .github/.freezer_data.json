@@ -2,10 +2,10 @@
   "test": true,
   "master": {
     "status": "freeze",
-    "frozen": true,
+    "frozen": false,
     "frozen_at": null,
     "frozen_by": null,
-    "unfrozen_at": "2019-12-09T21:56:29Z",
+    "unfrozen_at": "2019-12-09T22:10:16Z",
     "unfrozen_by": "SatheeshJM"
   },
   "undefined": {
