@@ -23,7 +23,6 @@
 
   "persistence" :
   {
-    "file" : ".github/.freezer_data.json",
-    "branch" : "freezer_sandbox"
+    "branch" : "elsa_data"
   }
 }
