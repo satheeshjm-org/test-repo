@@ -1,0 +1,28 @@
+{
+
+    "commands" : [
+      {
+        "name" :  "freeze_branch",
+        "command_regex" : ["^freeze$"],
+        "no_of_arguments" : 1,
+        "args_regex" : [
+          ["^master$"]
+        ],
+        "teams_whitelisted" : [ "fc-qa", "fc-admins"]
+      },
+      {
+        "name" :  "unfreeze_branch",
+        "command_regex" : ["^unfreeze$"],
+        "no_of_arguments" : 1,
+        "args_regex" : [
+          ["^master$"]
+        ],
+        "teams_whitelisted" : [ "fc-qa", "fc-admins"]
+      }
+    ],
+
+  "persistence" :
+  {
+    "branch" : "elsa_data"
+  }
+}
