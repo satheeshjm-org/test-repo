@@ -4,6 +4,7 @@ const github = require('@actions/github');
 try {
 
   const context = github.context
+  const payload = context.payload
   
   var payload_pr = payload.pull_request
   var is_merged = payload_pr.merged
