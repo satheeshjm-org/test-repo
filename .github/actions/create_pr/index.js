@@ -43,7 +43,7 @@ async function run() {
           owner: repo.owner,
           repo: repo.repo,
           base: base,
-          head: `head`,
+          head: head,
           title: "test"
         })
         console.info(`${log_prefix} Pull request created`)
