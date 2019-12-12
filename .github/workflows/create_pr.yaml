@@ -2,7 +2,6 @@ on:
   pull_request:
     types: [closed]
     branches: 
-      - master
       - dev
 jobs:
   create_release:
@@ -11,8 +10,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - run: npm install --prefix ./.github/actions/create_pr/
-      - name: Create PR
+      - name: Install Dependencies
+        run: npm install --prefix ./.github/actions/create_pr/
+      - name: Freshchat Workflow - Pre Release
         id: create_pr
         uses: ./.github/actions/create_pr/
         env:
