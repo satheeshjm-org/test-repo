@@ -21,11 +21,14 @@ async function run() {
     //  return ;
     //}
 
+    console.table(context)
+
     var resp
       try {
       core.debug(`Fetching pull request ${payload_pr.number}`)
       resp = await github_cli.pulls.get({
           repo: context.repo,
+          owner: context.owner,
           pull_number: payload_pr.number
         })
       }
@@ -34,6 +37,7 @@ async function run() {
           core.info(`Resource not found for ${e.request.url}`)
         } else {
           core.error(e)
+          throw e;
         }
       }
 
