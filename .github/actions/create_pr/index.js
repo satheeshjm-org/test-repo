@@ -36,7 +36,6 @@ async function run() {
         state: "open"
       })
 
-      console.table(repo)
       var prs = resp.data
       if (prs.length == 0) {
         console.info(`${log_prefix} Pull request not found. So creating one`)
@@ -44,7 +43,7 @@ async function run() {
           owner: repo.owner,
           repo: repo.repo,
           base: base,
-          head: `${repo.org}:${head}`,
+          head: `${repo.owner}:${head}`,
           title: "test"
         })
         console.info(`${log_prefix} Pull request created`)
