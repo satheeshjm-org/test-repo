@@ -11,6 +11,7 @@ try {
   if (!is_merged) {
     console.log(`This is not a merge`)
     return ;
+  }
   
   console.log(`${payload_pr.number} is a merge`) 
 } 
