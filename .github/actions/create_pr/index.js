@@ -46,6 +46,9 @@ async function run() {
         })
         console.info(`${log_prefix} Pull request created`)
       }
+      else {
+        console.info(`${log_prefix} ${prs.length} pull requests found`)
+      }
     }
     catch (e) {
       console.error(e)
