@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    branches:
+      - master
+    types: [closed]
+jobs:
+  create_release:
+    name: Create PR
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create PR
+        id: create_pr
+        uses: ./.github/actions/create_pr
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          draft: false
+          prerelease: false
+ 
