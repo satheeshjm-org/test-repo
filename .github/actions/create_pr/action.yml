@@ -3,5 +3,5 @@ description: 'Create PR '
 runs:
   #using: 'docker'
   #image: 'Dockerfile'
-  using: node13
+  using: node12
   main: index.js
