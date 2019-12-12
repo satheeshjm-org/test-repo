@@ -4,14 +4,29 @@ const github = require('@actions/github');
 try {
 
   const context = github.context
+  const github_cli = new github.GitHub()
+
   const payload = context.payload
-  
-  var payload_pr = payload.pull_request
-  var is_merged = payload_pr.merged
-  if (!is_merged) {
-    console.log(`This is not a merge`)
-    return ;
-  }
+
+  //var payload_pr = payload.pull_request
+  //var is_merged = payload_pr.merged
+  //if (!is_merged) {
+  //  console.log(`This is not a merge`)
+  //  return ;
+  //}
+
+  console.table(context.payload)
+
+   github_cli.repos.createRelease({
+   repo : "satheeshjm-org/test-repo",
+   name : "tag",
+   tag_name : "test_tag",
+   body: "test",
+   draft: false,
+   prerelease: false,
+   owner: "SatheeshJM"
+  })
+
 }
 catch (error) {
   core.setFailed(error.message);
