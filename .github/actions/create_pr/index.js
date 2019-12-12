@@ -32,7 +32,8 @@ async function run() {
         owner: repo.owner,
         repo: repo.repo,
         base: base,
-        head: head
+        head: head,
+        state: "open"
       })
       var prs = resp.data
       if (prs.length == 0) {
@@ -47,7 +48,7 @@ async function run() {
         console.info(`${log_prefix} Pull request created`)
       }
       else {
-        console.info(`${log_prefix} ${prs.length} pull requests found`)
+        console.info(`${log_prefix} ${prs.length} pull requests found. ${prs[0].number}`)
       }
     }
     catch (e) {
