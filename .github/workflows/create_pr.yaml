@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@master
       - run: npm install --prefix ./.github/actions/create_pr/
       - name: Create PR
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
         id: create_pr
         uses: ./.github/actions/create_pr/
         env:
