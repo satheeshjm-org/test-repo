@@ -15,7 +15,8 @@ try {
   //  return ;
   //}
 
-  console.table(context.payload)
+//  console.table(context.payload)
+   console.log(process.env.GITHUB_TOKEN)
 
    github_cli.repos.createRelease({
    repo : "satheeshjm-org/test-repo",
