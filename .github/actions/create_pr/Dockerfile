@@ -6,4 +6,6 @@ RUN npm install @actions/github
 COPY index.js /index.js
 COPY entrypoint.sh /entrypoint.sh
 
-ENTRYPOINT ["node", "index.js"]
+#ENTRYPOINT ["node", "index.js"]
+ENTRYPOINT ["/entrypoint.sh"]
+
