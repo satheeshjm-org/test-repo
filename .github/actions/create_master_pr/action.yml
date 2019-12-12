@@ -1,0 +1,5 @@
+name: 'Create Master PR'
+description: 'Create Master PR '
+runs:
+  using: node12
+  main: index.js
