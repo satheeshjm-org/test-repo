@@ -22,28 +22,44 @@ async function run() {
     //  return ;
     //}
 
-    console.table(context)
 
-    var resp
-      try {
-      core.debug(`Fetching pull request ${payload_pr.number}`)
-      resp = await github_cli.pulls.get({
-          owner: repo.owner,
-          repo: repo.repo,
-          pull_number: payload_pr.number
-        })
-      }
-      catch (e) {
-        if (e.name == "HttpError" && e.status == 404) {
-          core.info(`Resource not found for ${e.request.url}`)
-        } else {
-          core.error(e)
-          throw e;
-        }
-      }
-
+    var base = "master" //pull from config
+    var head = payload_pr.base.ref
+    try {
+    core.debug(`${base} -> ${head} Fetching pull request`)
+    var resp = await github_cli.pulls.list({
+        owner: repo.owner,
+        repo: repo.repo,
+        base: base,
+        head: head
+      })
 
       console.table(resp)
+    }
+    catch (e) {
+      if (e.name == "HttpError" && e.status == 404) {
+        core.info(`${base} -> ${head} Pull request not found. So creating one`)
+
+        var resp2 = await github_cli.pulls.create({
+          owner: repo.owner,
+          repo: repo.repo,
+          base: base,
+          head: head,
+          title: "test"
+        })
+        console.table(resp2)
+
+        core.info(`${base} -> ${head} Pull request created`)
+      }
+      else {
+        core.error(e)
+        throw e;
+      }
+    }
+
+
+
+
 
   }
   catch (error) {
