@@ -10,6 +10,7 @@ async function run() {
     const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
 
     const payload = context.payload
+    var repo = context.repo
 
     var payload_pr = payload.pull_request
     if(!payload_pr) {
@@ -27,8 +28,8 @@ async function run() {
       try {
       core.debug(`Fetching pull request ${payload_pr.number}`)
       resp = await github_cli.pulls.get({
-          repo: context.repo,
-          owner: context.owner,
+          owner: repo.owner,
+          repo: repo.repo,
           pull_number: payload_pr.number
         })
       }
