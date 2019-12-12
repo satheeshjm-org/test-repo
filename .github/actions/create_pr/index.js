@@ -3,35 +3,42 @@ const github = require('@actions/github');
 
 
 async function run() {
-  
+
   try {
 
     const context = github.context
-    console.log(process.env.GITHUB_TOKEN)
-    console.log("l")
     const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
 
     const payload = context.payload
 
-    //var payload_pr = payload.pull_request
+    var payload_pr = payload.pull_request
+    if(!payload_pr) {
+      throw new Error(`Payload "pull_request" missing`)
+    }
     //var is_merged = payload_pr.merged
     //if (!is_merged) {
-    //  console.log(`This is not a merge`)
+    //  core.info(`This is not a merge`)
     //  return ;
     //}
 
-  //  console.table(context.payload)
-     console.log(process.env.GITHUB_TOKEN)
+    var resp
+      try {
+      core.debug(`Fetching pull request ${payload_pr.number}`)
+      resp = await github_cli.pulls.get({
+          repo: context.repo,
+          pull_number: payload_pr.number
+        })
+      }
+      catch (e) {
+        if (e.name == "HttpError" && e.status == 404) {
+          core.info(`Resource not found for ${e.request.url}`)
+        } else {
+          core.error(e)
+        }
+      }
 
-    await github_cli.repos.createRelease({
-     repo : "satheeshjm-org/test-repo",
-     name : "tag",
-     tag_name : "test_tag",
-     body: "test",
-     draft: false,
-     prerelease: false,
-     owner: "SatheeshJM"
-    })
+
+      console.table(resp)
 
   }
   catch (error) {
