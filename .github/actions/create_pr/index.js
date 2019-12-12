@@ -18,7 +18,7 @@ async function run() {
     }
     //var is_merged = payload_pr.merged
     //if (!is_merged) {
-    //  core.info(`This is not a merge`)
+    //  console.info(`This is not a merge`)
     //  return ;
     //}
 
@@ -26,7 +26,7 @@ async function run() {
     var base = "master" //pull from config
     var head = payload_pr.base.ref
     try {
-    core.debug(`${base} -> ${head} Fetching pull request`)
+    console.debug(`${base} -> ${head} Fetching pull request`)
     var resp = await github_cli.pulls.list({
         owner: repo.owner,
         repo: repo.repo,
@@ -38,7 +38,7 @@ async function run() {
     }
     catch (e) {
       if (e.name == "HttpError" && e.status == 404) {
-        core.info(`${base} -> ${head} Pull request not found. So creating one`)
+        console.info(`${base} -> ${head} Pull request not found. So creating one`)
 
         var resp2 = await github_cli.pulls.create({
           owner: repo.owner,
@@ -49,10 +49,10 @@ async function run() {
         })
         console.table(resp2)
 
-        core.info(`${base} -> ${head} Pull request created`)
+        console.info(`${base} -> ${head} Pull request created`)
       }
       else {
-        core.error(e)
+        console.error(e)
         throw e;
       }
     }
