@@ -5,16 +5,16 @@ on:
       - dev
 jobs:
   create_release:
-    name: Create PR
+    name: Freshchat Pre Release
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@master
       - name: Install Dependencies
-        run: npm install --prefix ./.github/actions/create_pr/
-      - name: Freshchat Workflow - Pre Release
-        id: create_pr
-        uses: ./.github/actions/create_pr/
+        run: npm install --prefix ./.github/actions/create_master_pr/
+      - name: Create PR to master
+        id: create_master_pr
+        uses: ./.github/actions/create_master_pr/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
