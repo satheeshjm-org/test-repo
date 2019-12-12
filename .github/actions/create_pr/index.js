@@ -18,11 +18,11 @@ async function run() {
     if(!payload_pr) {
       throw new Error(`Payload "pull_request" missing`)
     }
-    //var is_merged = payload_pr.merged
-    //if (!is_merged) {
-    //  console.info(`This is not a merge`)
-    //  return ;
-    //}
+    var is_merged = payload_pr.merged
+    if (!is_merged) {
+     console.info(`This is not a merge`)
+     return ;
+    }
 
     var pr_base = payload_pr.base.ref
     var pr_head = payload_pr.head.ref
