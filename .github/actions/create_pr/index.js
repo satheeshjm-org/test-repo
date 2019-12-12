@@ -35,27 +35,7 @@ async function run() {
     var base = production_branch //pull from config
     var head = payload_pr.base.ref
     var log_prefix = `${head}->${base}`
-    var pr_body = ""
-    //find diff
-    console.debug(`${log_prefix} comparing branches`)
-    var diff_resp = await github_cli.repos.compareCommits({
-      owner: repo.owner,
-      repo: repo.repo,
-      base: base,
-      head: head,
-    })
-    var diff = diff_resp.data
-    var diff_commits = diff.commits
-    if (diff_commits.length == 0) {
-      //no diff
-      console.info(`${log_prefix} no diff found between branches`)
-      throw new Error("No diff between branches")
-    }
-    else {
-      console.info(`${log_prefix} got diff between branches`)
-      var commit_msgs = diff_commits.map(c => c.commit.message)
-      pr_body = commit_msgs.join('\n')
-    }
+    var pr_body = `${payload_pr.title}(#${payload_pr.number})`
 
 
 
@@ -87,7 +67,10 @@ async function run() {
         console.info(`${log_prefix} Pull request created`)
       }
       else {
-        console.info(`${log_prefix} ${prs.length} pull requests found. ${prs[0].number}`)
+        var existing_pr = prs[0]
+
+        console.info(`${log_prefix} ${prs.length} pull requests found. ${existing_pr.number}`)
+        pr_body = `${existing_pr.body}\n${pr_body}`
 
         await github_cli.pulls.update({
           owner: repo.owner,
