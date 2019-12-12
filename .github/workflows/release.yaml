@@ -1,1 +1,20 @@
 
+on:
+  pull_request:
+    types: [closed]
+    branches: 
+      - msater
+jobs:
+  create_release:
+    name: Freshchat Release Flow
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: npm install --prefix ./.github/actions/create_release/
+      - name: Create Release
+        id: create_release
+        uses: ./.github/actions/create_release/
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
