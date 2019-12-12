@@ -4,7 +4,7 @@ const github = require('@actions/github');
 try {
 
   const context = github.context
-  const github_cli = new github.GitHub()
+  const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
 
   const payload = context.payload
 
