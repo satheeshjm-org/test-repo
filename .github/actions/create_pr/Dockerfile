@@ -1,6 +1,9 @@
+FROM node:13.3.0-alpine
 
-FROM alpine:3.10
+RUN npm install @actions/core
+RUN echo "a"
+RUN npm install @actions/github
 
-COPY entrypoint.sh /entrypoint.sh
+COPY source/app.js /app.js
 
-ENTRYPOINT ["/entrypoint.sh"]
+ENTRYPOINT ["node", "app.js"]
