@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [closed]
     branches: 
-      - msater
+      - master
 jobs:
   create_release:
     name: Freshchat Release Flow
