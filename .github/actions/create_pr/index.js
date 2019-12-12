@@ -41,7 +41,7 @@ async function run() {
 
     try {
       console.debug(`${log_prefix} Fetching pull request`)
-      var resp = await github_cli.pulls.list({
+      var prlist_resp = await github_cli.pulls.list({
         owner: repo.owner,
         repo: repo.repo,
         base: base,
@@ -49,14 +49,11 @@ async function run() {
         state: "open",
       })
 
-      var prs = resp.data
+      var prs = prlist_resp.data
       if (prs.length == 0) {
         console.info(`${log_prefix} Pull request not found. So creating one`)
-        //calculate description
-        var compare_resp = await github_cli.compareCommits({
 
-        })
-        var resp2 = await github_cli.pulls.create({
+        var prcreate_resp = await github_cli.pulls.create({
           owner: repo.owner,
           repo: repo.repo,
           base: base,
@@ -72,7 +69,7 @@ async function run() {
         console.info(`${log_prefix} ${prs.length} pull requests found. ${existing_pr.number}`)
         pr_body = `${existing_pr.body}\n${pr_body}`
 
-        await github_cli.pulls.update({
+        var prupdate_resp = await github_cli.pulls.update({
           owner: repo.owner,
           repo: repo.repo,
           pull_number: prs[0].number,
