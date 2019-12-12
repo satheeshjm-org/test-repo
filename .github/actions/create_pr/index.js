@@ -7,6 +7,9 @@ async function run() {
   try {
 
     const context = github.context
+    console.log(process.env.GITHUB_TOKEN)
+    console.log("l")
+    console.table(process.env)
     const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
 
     const payload = context.payload
