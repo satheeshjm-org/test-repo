@@ -15,6 +15,6 @@ jobs:
       - name: Create PR
         id: create_pr
         uses: ./.github/actions/create_pr/
-        with:
-          API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
