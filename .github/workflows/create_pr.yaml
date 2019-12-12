@@ -1,6 +1,8 @@
 on:
   pull_request:
     types: [closed]
+    branches: 
+      - master
 jobs:
   create_release:
     name: Create PR
