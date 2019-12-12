@@ -25,21 +25,18 @@ async function run() {
 
     var base = "master" //pull from config
     var head = payload_pr.base.ref
+    var log_prefix = `${head}->${base}`
     try {
-    console.debug(`${base} -> ${head} Fetching pull request`)
-    var resp = await github_cli.pulls.list({
+      console.debug(`${log_prefix} Fetching pull request`)
+      var resp = await github_cli.pulls.list({
         owner: repo.owner,
         repo: repo.repo,
         base: base,
         head: head
       })
-
-      console.table(resp)
-    }
-    catch (e) {
-      if (e.name == "HttpError" && e.status == 404) {
-        console.info(`${base} -> ${head} Pull request not found. So creating one`)
-
+      var prs = resp.data
+      if (prs.length == 0) {
+        console.info(`${log_prefix} Pull request not found. So creating one`)
         var resp2 = await github_cli.pulls.create({
           owner: repo.owner,
           repo: repo.repo,
@@ -47,14 +44,12 @@ async function run() {
           head: head,
           title: "test"
         })
-        console.table(resp2)
-
-        console.info(`${base} -> ${head} Pull request created`)
+        console.info(`${log_prefix} Pull request created`)
       }
-      else {
-        console.error(e)
-        throw e;
-      }
+    }
+    catch (e) {
+      console.error(e)
+      throw e;
     }
 
 
