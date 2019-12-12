@@ -2,9 +2,31 @@ const core = require('@actions/core');
 const github = require('@actions/github');
 
 
+async function construct_pr_description(base_branch, head_branch) {
+  var r2 = await context.github.repos.compareCommits(context.repo({
+    base: base_branch,
+    head: head_branch,
+  }))
+  var diff = r2.data
+  var diff_commits = diff.commits
+  if (diff_commits.length == 0) {
+    //no diff
+    return ""
+  }
+  else {
+    var commit_msgs = diff_commits.map(c => c.commit.message)
+    var pr_description = commit_msgs.join('\n')
+    return pr_description
+  }
+}
+
+
 async function run() {
 
   try {
+
+    var production_branch = "master"
+    var staging_branch = "dev"
 
     const context = github.context
     const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
@@ -23,7 +45,7 @@ async function run() {
     //}
 
 
-    var base = "master" //pull from config
+    var base = production_branch //pull from config
     var head = payload_pr.base.ref
     var log_prefix = `${head}->${base}`
     try {
@@ -33,23 +55,36 @@ async function run() {
         repo: repo.repo,
         base: base,
         head: `${repo.owner}:${head}`,
-        state: "open"
+        state: "open",
       })
 
       var prs = resp.data
       if (prs.length == 0) {
         console.info(`${log_prefix} Pull request not found. So creating one`)
+        //calculate description
+        var compare_resp = await github_cli.compareCommits({
+
+        })
         var resp2 = await github_cli.pulls.create({
           owner: repo.owner,
           repo: repo.repo,
           base: base,
           head: head,
-          title: "test"
+          title: "test",
+          body: await construct_pr_description(base, head)
         })
         console.info(`${log_prefix} Pull request created`)
       }
       else {
         console.info(`${log_prefix} ${prs.length} pull requests found. ${prs[0].number}`)
+
+        await github_cli.pulls.update({
+          owner: repo.owner,
+          repo: repo.repo,
+          pull_number: prs[0].number,
+          body: await construct_pr_description(base, head)
+        })
+        //update description
       }
     }
     catch (e) {
