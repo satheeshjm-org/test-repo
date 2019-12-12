@@ -15,4 +15,6 @@ jobs:
         uses: ./.github/actions/create_pr/
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - run: | 
+         npm install
  
