@@ -8,6 +8,8 @@ jobs:
     name: Create PR
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        uses: actions/checkout@v1
       - name: Create PR
         id: create_pr
         uses: ./.github/actions/create_pr
