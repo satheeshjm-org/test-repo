@@ -15,5 +15,5 @@ jobs:
         id: create_pr
         uses: ./.github/actions/create_pr/
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.WORKFLOW_TOKEN }}
  
