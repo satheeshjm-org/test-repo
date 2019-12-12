@@ -1,34 +1,42 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
 
-try {
 
-  const context = github.context
-  const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
+async function run() {
+  
+  try {
 
-  const payload = context.payload
+    const context = github.context
+    const github_cli = new github.GitHub(process.env.GITHUB_TOKEN)
 
-  //var payload_pr = payload.pull_request
-  //var is_merged = payload_pr.merged
-  //if (!is_merged) {
-  //  console.log(`This is not a merge`)
-  //  return ;
-  //}
+    const payload = context.payload
 
-//  console.table(context.payload)
-   console.log(process.env.GITHUB_TOKEN)
+    //var payload_pr = payload.pull_request
+    //var is_merged = payload_pr.merged
+    //if (!is_merged) {
+    //  console.log(`This is not a merge`)
+    //  return ;
+    //}
 
-   github_cli.repos.createRelease({
-   repo : "satheeshjm-org/test-repo",
-   name : "tag",
-   tag_name : "test_tag",
-   body: "test",
-   draft: false,
-   prerelease: false,
-   owner: "SatheeshJM"
-  })
+  //  console.table(context.payload)
+     console.log(process.env.GITHUB_TOKEN)
+
+    await github_cli.repos.createRelease({
+     repo : "satheeshjm-org/test-repo",
+     name : "tag",
+     tag_name : "test_tag",
+     body: "test",
+     draft: false,
+     prerelease: false,
+     owner: "SatheeshJM"
+    })
+
+  }
+  catch (error) {
+    core.setFailed(error.message);
+  }
 
 }
-catch (error) {
-  core.setFailed(error.message);
-}
+
+
+run()
