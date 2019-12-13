@@ -25,6 +25,8 @@ jobs:
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
+      - name: ls
+        run: ls -a node_modules
       - name: Install Dependencies
         run: npm install --prefix ./.github/actions/create_release/
       - name: Create Release
