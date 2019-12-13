@@ -47,9 +47,10 @@ async function run() {
 
     //calculate tag
     const pr_title = payload_pr.title //title will be of the format Release: x.x.x.x
+    console.log(pr_title)
     const regex_match = pr_title.match(/^Release:((\\d+\\.){3}\\d+)$/m)
-    var release_version = `Release`
     console.table(regex_match)
+    var release_version = `Release`
     if(regex_match) {
       release_version = regex_match[1]
     }
@@ -88,6 +89,8 @@ async function run() {
       release_body = existing_release.body + `\n\n${release_body}`
 
       var updaterelease_resp = await github_cli.repos.updateRelease({
+        owner: repo.owner,
+        repo: repo.repo,
         release_id : existing_release.id,
         body : release_body
       })
