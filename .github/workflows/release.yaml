@@ -19,7 +19,7 @@ jobs:
         uses: actions/cache@v1
         with:
           path: ~/.npm 
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('./.github/actions/create_release/package.json') }}
       - name: Install Dependencies
         run: npm install --prefix ./.github/actions/create_release/
       - name: Create Release
