@@ -25,4 +25,4 @@ jobs:
       run: npm install
       
     - name: ls
-      run: ls -a ~/.npm
+      run: ls -a 
