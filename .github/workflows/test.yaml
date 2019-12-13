@@ -13,20 +13,22 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-          ref: master
-          fetch-depth: 1
+        repository: satheeshjm-org/test-actions
+        ref: master
+        fetch-depth: 1
+        token: ${{ secrets.jm_pat }}
     - name: Cache node modules
       uses: actions/cache@v1
-      with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/index.js') }}
+      with: 
+        path: ~/.npm 
+        key: ${{ runner.os }}-node-${{ hashFiles('actions/jm_test_action/package.json') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
           ${{ runner.os }}-
 
     - name: Install Dependencies
-      run: npm install --prefix ./.github/actions/create_release/
+      run: npm install --prefix ./actions/jm_test_action/
       
     - name: ls
-      run: ls ~
+      run: ls -a ~
