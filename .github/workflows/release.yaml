@@ -27,6 +27,8 @@ jobs:
       - name: Install Dependencies
         if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm install --prefix ./.github/actions/create_release/
+      - name: ls 
+        run: ls -a
       - name: Create Release
         id: create_release
         uses: ./.github/actions/create_release/
