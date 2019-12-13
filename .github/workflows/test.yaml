@@ -20,7 +20,7 @@ jobs:
           ${{ runner.os }}-
 
     - name: Install Dependencies
-      run: npm install
+      run: npm install --prefix ./.github/actions/create_release/
       
     - name: ls
       run: ls ~
