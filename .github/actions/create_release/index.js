@@ -55,7 +55,7 @@ async function run() {
 
     var existing_release
     try {
-      var getrelease_resp = await github_cli.repo.getReleaseByTag({
+      var getrelease_resp = await github_cli.repos.getReleaseByTag({
         owner: repo.owner,
         repo: repo.repo,
         tag: release_version,
@@ -86,7 +86,7 @@ async function run() {
     else {
       release_body = existing_release.body + `\n\n${release_body}`
 
-      var updaterelease_resp = await github_cli.repo.updateRelease({
+      var updaterelease_resp = await github_cli.repos.updateRelease({
         release_id : existing_release.id,
         body : release_body
       })
