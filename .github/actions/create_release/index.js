@@ -64,7 +64,7 @@ async function run() {
     }
     catch (e) {
       if (e.name == "HttpError" && e.status == 404) {
-        logger.info(`Resource not found for ${e.request.url}`)
+        console.info(`Resource not found for ${e.request.url}`)
       }
       else {
         throw e
