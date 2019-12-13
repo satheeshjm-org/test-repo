@@ -42,8 +42,7 @@ async function run() {
 
 
     //calculate body
-    var release_body = `${payload_pr.title}(#${payload_pr.number})`
-    release_body += `\n\n${payload_pr.body}`
+    var release_body = `${payload_pr.title}(#${payload_pr.number})\n\n${payload_pr.body}`
 
     //calculate tag
     const pr_title = payload_pr.title //title will be of the format Release: x.x.x.x
@@ -56,11 +55,13 @@ async function run() {
 
     var existing_release
     try {
+      console.debug(`Getting release by tag : ${release_tag}`)
       var getrelease_resp = await github_cli.repos.getReleaseByTag({
         owner: repo.owner,
         repo: repo.repo,
         tag: release_tag,
       })
+      console.debug(`Got release for tag : ${release_tag}`)
       existing_release = getrelease_resp.data
     }
     catch (e) {
@@ -73,6 +74,7 @@ async function run() {
     }
 
     if (!existing_release) {
+      console.debug(`Creating release for tag : ${release_tag}`)
       var createrelease_resp = await github_cli.repos.createRelease({
         owner: repo.owner,
         repo: repo.repo,
@@ -83,16 +85,21 @@ async function run() {
         prerelease: false,
         target_commitish: production_branch
       });
+      console.debug(`Created relase for tag : ${release_tag}`)
     }
     else {
-      release_body = existing_release.body + `\n\n${release_body}`
+      release_body = `${existing_release.body}\n\n${release_body}`
 
+      console.debug(`New Release body \n ${release_body}`)
+      console.debug(`Updating release for tag : ${release_tag}`)
       var updaterelease_resp = await github_cli.repos.updateRelease({
         owner: repo.owner,
         repo: repo.repo,
         release_id : existing_release.id,
         body : release_body
       })
+      console.debug(`Updated release for tag : ${release_tag}`)
+
     }
 
   }
