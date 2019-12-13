@@ -21,6 +21,7 @@ jobs:
         id: create_release
         uses: ./.github/actions/create_release/
         with:
-          head_branch: dev #we only want this flow to run for dev -> master
+          production_branch: master 
+          staging_branch: dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
