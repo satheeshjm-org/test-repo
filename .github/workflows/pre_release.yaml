@@ -19,6 +19,8 @@ jobs:
       - name: Create PR to master
         id: create_master_pr
         uses: ./.github/actions/create_master_pr/
+        with:
+          ignore_head_branch: master #we don't want this flow to run for master -> dev reverse merge
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
