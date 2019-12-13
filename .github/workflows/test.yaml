@@ -1,14 +1,19 @@
 name: Caching with npm
 
-on: push
+on: 
+  push:
+    branches: dev
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-
+    - uses: actions/checkout@v2
+      with:
+          ref: master
+          fetch-depth: 1
     - name: Cache node modules
       uses: actions/cache@v1
       with:
