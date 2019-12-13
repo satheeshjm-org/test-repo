@@ -19,13 +19,14 @@ jobs:
       id: cache_node_modules
       uses: actions/cache@v1
       with: 
-        path: node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
+        path: .github/actions/create_release/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
     - name: ls
-      run: ls -a node_modules
+      if: steps.cache_node_modules.outputs.cache-hit == 'true'
+      run: ls -a .github/actions/create_release/node_modules
     - name: Install Dependencies
       if: steps.cache_node_modules.outputs.cache-hit != 'true'
       run: npm install
       
     - name: ls
-      run: ls -a node_modules
+      run: ls -a .github/actions/create_release/node_modules
