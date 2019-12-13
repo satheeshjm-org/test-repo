@@ -41,17 +41,56 @@ async function run() {
     }
 
 
+    //calculate body
+    var release_body = `${payload_pr.title}(#${payload_pr.number})`
+    release_body += `\n\n${payload_pr.body}`
 
-    var release_resp = await github_cli.repos.createRelease({
-      owner: repo.owner,
-      repo: repo.repo,
-      tag_name: payload_pr.title, //TODO: change it to tag format
-      name: payload_pr.title,
-      body: payload_pr.body,
-      draft: false,
-      prerelease: false,
-      target_commitish: production_branch
-    });
+    //calculate tag
+    const pr_title = payload_pr.title //title will be of the format Release: x.x.x.x
+    const regex_match = pr_title.match(/^Release:((\\d+\\.){3}\\d+)$/m)
+    var release_version = `Release`
+    if(regex_match) {
+      release_version = regex_match[1]
+    }
+
+    var existing_release
+    try {
+      var getrelease_resp = await github_cli.repo.getReleaseByTag({
+        owner: repo.owner,
+        repo: repo.repo,
+        tag: release_version,
+      })
+      existing_release = getrelease_resp.data
+    }
+    catch (e) {
+      if (e.name == "HttpError" && e.status == 404) {
+        logger.info(`Resource not found for ${e.request.url}`)
+      }
+      else {
+        throw e
+      }
+    }
+
+    if (!existing_release) {
+      var createrelease_resp = await github_cli.repos.createRelease({
+        owner: repo.owner,
+        repo: repo.repo,
+        tag_name: release_version,
+        name: payload_pr.title,
+        body: payload_pr.body,
+        draft: false,
+        prerelease: false,
+        target_commitish: production_branch
+      });
+    }
+    else {
+      release_body = existing_release.body + `\n\n${release_body}`
+
+      var updaterelease_resp = await github_cli.repo.updateRelease({
+        release_id : existing_release.id,
+        body : release_body
+      })
+    }
 
   }
   catch (error) {
