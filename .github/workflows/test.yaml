@@ -1,19 +1,25 @@
 name: Caching with npm
 
-on: push
+on: 
+  push:
+    branches: 
+      - master
+
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v1
-
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 1
     - name: Cache node modules
       uses: actions/cache@v1
-      with:
-        path: ~/.npm # npm cache files are stored in `~/.npm` on Linux/macOS
-        key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
+      with: 
+        path: ~/.npm 
+        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
         restore-keys: |
           ${{ runner.os }}-build-${{ env.cache-name }}-
           ${{ runner.os }}-build-
@@ -23,4 +29,4 @@ jobs:
       run: npm install
       
     - name: ls
-      run: ls ~
+      run: ls -a ~
