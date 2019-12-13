@@ -47,20 +47,19 @@ async function run() {
 
     //calculate tag
     const pr_title = payload_pr.title //title will be of the format Release: x.x.x.x
-    console.log(pr_title)
     const regex_match = pr_title.match(/^Release:((\\d+\\.){3}\\d+)$/m)
-    console.table(regex_match)
-    var release_version = `Release`
-    if(regex_match) {
-      release_version = regex_match[1]
+    if(!regex_match) {
+      throw new Error(`Invalid Title. Expected format "Release:x.x.x.x" `)
     }
+    var release_tag = regex_match[1]
+
 
     var existing_release
     try {
       var getrelease_resp = await github_cli.repos.getReleaseByTag({
         owner: repo.owner,
         repo: repo.repo,
-        tag: release_version,
+        tag: release_tag,
       })
       existing_release = getrelease_resp.data
     }
@@ -77,7 +76,7 @@ async function run() {
       var createrelease_resp = await github_cli.repos.createRelease({
         owner: repo.owner,
         repo: repo.repo,
-        tag_name: release_version,
+        tag_name: release_tag,
         name: payload_pr.title,
         body: payload_pr.body,
         draft: false,
