@@ -5,6 +5,7 @@ on:
       - closed
     branches: 
       - master
+      - dev
 jobs:
   create_release:
     name: Freshchat Release Flow
