@@ -20,10 +20,6 @@ jobs:
       with: 
         path: ~/.npm 
         key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-build-${{ env.cache-name }}-
-          ${{ runner.os }}-build-
-          ${{ runner.os }}-
 
     - name: Install Dependencies
       run: npm install
