@@ -28,5 +28,9 @@ jobs:
       if: steps.cache_node_modules.outputs.cache-hit != 'true'
       run: npm install
       
-    - name: ls
+    - name: ls1
+      run: ls -a
+    - name: ls2
+      run: ls -a .github/actions/create_release
+    - name: ls3
       run: ls -a .github/actions/create_release/node_modules
