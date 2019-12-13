@@ -20,7 +20,8 @@ jobs:
         id: create_master_pr
         uses: ./.github/actions/create_master_pr/
         with:
-          ignore_head_branch: master #we don't want this flow to run for master -> dev reverse merge
+          production_branch: master 
+          staging_branch: dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  
