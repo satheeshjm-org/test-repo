@@ -47,9 +47,9 @@ async function run() {
 
     //calculate tag
     const pr_title = payload_pr.title //title will be of the format Release: x.x.x.x
-    const regex_match = pr_title.match(/^Release:((\\d+\\.){3}\\d+)$/m)
+    const regex_match = pr_title.match(/^Release:((\d+\.){3}\d+)$/m) //todo: move this to inputs
     if(!regex_match) {
-      throw new Error(`Invalid Title. Expected format "Release:x.x.x.x" `)
+      throw new Error(`Invalid Title. Expected format "Release:x.x.x.x" Actual value ${pr_title} `)
     }
     var release_tag = regex_match[1]
 
