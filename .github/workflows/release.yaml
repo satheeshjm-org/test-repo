@@ -19,14 +19,12 @@ jobs:
         id: cache_node_modules
         uses: actions/cache@v1
         with:
-          path: ~/.npm 
+          path: .github/actions/create_release/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
           restore-keys: |
             ${{ runner.os }}-build-${{ env.cache-name }}-
             ${{ runner.os }}-build-
             ${{ runner.os }}-
-      - name: ls 
-        run: ls ~/.npm 2> /dev/null
       - name: Install Dependencies
         run: npm install --prefix ./.github/actions/create_release/
       - name: Create Release
