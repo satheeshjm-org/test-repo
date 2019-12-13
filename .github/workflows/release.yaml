@@ -5,7 +5,6 @@ on:
       - closed
     branches: 
       - master
-      - dev
 jobs:
   create_release:
     name: Freshchat Release Flow
@@ -21,5 +20,7 @@ jobs:
       - name: Create Release
         id: create_release
         uses: ./.github/actions/create_release/
+        with:
+          head_branch: dev #we only want this flow to run for dev -> master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
