@@ -1,7 +1,8 @@
 
 on:
   pull_request:
-    types: [closed]
+    types: 
+      - closed
     branches: 
       - master
 jobs:
