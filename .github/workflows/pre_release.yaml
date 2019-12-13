@@ -10,12 +10,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 1
       - name: Install Dependencies
         run: npm install --prefix ./.github/actions/create_master_pr/
       - name: Create PR to master
         id: create_master_pr
         uses: ./.github/actions/create_master_pr/
+        with:
+          production_branch: master 
+          staging_branch: dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
  

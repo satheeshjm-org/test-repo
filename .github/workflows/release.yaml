@@ -5,18 +5,23 @@ on:
       - closed
     branches: 
       - master
-      - dev
 jobs:
   create_release:
     name: Freshchat Release Flow
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@v2
+        with:
+          ref: master
+          fetch-depth: 1
       - name: Install Dependencies
         run: npm install --prefix ./.github/actions/create_release/
       - name: Create Release
         id: create_release
         uses: ./.github/actions/create_release/
+        with:
+          production_branch: master 
+          staging_branch: dev
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
