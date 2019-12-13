@@ -16,11 +16,13 @@ jobs:
           ref: master
           fetch-depth: 1
       - name: Cache node modules
+        id: cache_node_modules
         uses: actions/cache@v1
         with:
           path: ~/.npm 
           key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
       - name: Install Dependencies
+        if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm install --prefix ./.github/actions/create_release/
       - name: Create Release
         id: create_release
