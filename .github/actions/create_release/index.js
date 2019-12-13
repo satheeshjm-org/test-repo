@@ -88,6 +88,7 @@ async function run() {
       console.debug(`Created relase for tag : ${release_tag}`)
     }
     else {
+      console.table(existing_release)
       release_body = `${existing_release.body}\n\n${release_body}`
 
       console.debug(`New Release body \n ${release_body}`)
@@ -96,7 +97,8 @@ async function run() {
         owner: repo.owner,
         repo: repo.repo,
         release_id : existing_release.id,
-        body : release_body
+        body : release_body,
+        target_commitish: production_branch
       })
       console.debug(`Updated release for tag : ${release_tag}`)
 
