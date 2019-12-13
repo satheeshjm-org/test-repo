@@ -16,6 +16,7 @@ jobs:
         ref: master
         fetch-depth: 1
     - name: Cache node modules
+      id: cache_node_modules
       uses: actions/cache@v1
       with: 
         path: node_modules
@@ -23,6 +24,7 @@ jobs:
     - name: ls
       run: ls -a node_modules
     - name: Install Dependencies
+      if: steps.cache_node_modules.outputs.cache-hit != 'true'
       run: npm install
       
     - name: ls
