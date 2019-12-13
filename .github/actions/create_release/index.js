@@ -49,6 +49,7 @@ async function run() {
     const pr_title = payload_pr.title //title will be of the format Release: x.x.x.x
     const regex_match = pr_title.match(/^Release:((\\d+\\.){3}\\d+)$/m)
     var release_version = `Release`
+    console.table(regex_match)
     if(regex_match) {
       release_version = regex_match[1]
     }
