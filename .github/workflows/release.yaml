@@ -21,13 +21,11 @@ jobs:
         with:
           path: .github/actions/create_release/node_modules
           key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-build-${{ env.cache-name }}-
-            ${{ runner.os }}-build-
-            ${{ runner.os }}-
       - name: ls
-        run: ls -a node_modules
+        if: steps.cache_node_modules.outputs.cache-hit != 'true'
+        run: ls -a .github/actions/create_release/node_modules
       - name: Install Dependencies
+        if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm install --prefix ./.github/actions/create_release/
       - name: Create Release
         id: create_release
