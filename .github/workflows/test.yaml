@@ -20,7 +20,8 @@ jobs:
       with: 
         path: node_modules
         key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
-
+    - name: ls
+      run: ls -a node_modules
     - name: Install Dependencies
       run: npm install
       
