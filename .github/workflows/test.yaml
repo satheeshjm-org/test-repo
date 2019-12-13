@@ -2,7 +2,8 @@ name: Caching with npm
 
 on: 
   push:
-    branches: dev
+    branches: 
+      - dev
 
 
 jobs:
