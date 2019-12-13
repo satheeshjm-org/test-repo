@@ -85,22 +85,10 @@ async function run() {
         prerelease: false,
         target_commitish: production_branch
       });
-      console.debug(`Created relase for tag : ${release_tag}`)
+      console.debug(`Created release for tag : ${release_tag}`)
     }
     else {
-      console.table(existing_release)
-      release_body = `${existing_release.body}\n\n${release_body}`
-
-      console.debug(`New Release body \n ${release_body}`)
-      console.debug(`Updating release for tag : ${release_tag}`)
-      var updaterelease_resp = await github_cli.repos.updateRelease({
-        owner: repo.owner,
-        repo: repo.repo,
-        release_id : existing_release.id,
-        body : release_body,
-        target_commitish: production_branch
-      })
-      console.debug(`Updated release for tag : ${release_tag}`)
+      throw new Error(`Release tag exists`)
 
     }
 
