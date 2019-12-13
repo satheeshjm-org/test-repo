@@ -1,0 +1,21 @@
+on:
+  pull_request:
+    types: 
+      - closed
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 1
+    - name: Cache node modules
+      id: cache_node_modules
+      uses: actions/cache@v1
+      with: 
+        path: node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('package.json') }}
