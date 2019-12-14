@@ -1,0 +1,34 @@
+name: Caching with npm
+
+on:
+  push:
+    branches: 
+      - master
+      - dev
+
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: master
+        fetch-depth: 1
+    - name: Cache node modules
+      id: cache_node_modules
+      uses: actions/cache@v1
+      with: 
+        path: .github/actions/create_release/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
+    - name: ls
+      if: steps.cache_node_modules.outputs.cache-hit == 'true'
+      run: ls -a .github/actions/create_release/node_modules
+    - name: Install Dependencies
+      if: steps.cache_node_modules.outputs.cache-hit != 'true'
+      run: npm install --prefix ./.github/actions/create_release/
+    - name: ls4
+      run: ls -a .github/actions/create_release/
+    - name: ls5
+      run: ls -a .github/actions/create_release/node_modules
