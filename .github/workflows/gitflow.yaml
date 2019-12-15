@@ -1,6 +1,7 @@
 env:
   STAGING_BRANCH: dev
   PRODUCTION_BRANCH: master
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 on:
   pull_request:
     types: 
