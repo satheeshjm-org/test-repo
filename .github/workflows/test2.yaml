@@ -24,7 +24,7 @@ jobs:
       uses: actions/cache@v1
       with: 
         path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('.github/actions/create_release/package.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('$GITHUB_WORKSPACE/test-actions/actions/gitflow_release/package.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
     - name: ls
@@ -32,8 +32,8 @@ jobs:
       run: ls -a ~/.npm
     - name: Install Dependencies
       if: steps.cache_node_modules.outputs.cache-hit != 'true'
-      run: npm install --prefix ./.github/actions/create_release/
+      run: npm install --prefix $GITHUB_WORKSPACE/test-actions/gitflow_release/
     - name: ls4
-      run: ls -a .github/actions/create_release/
+      run: ls -a $GITHUB_WORKSPACE/test-actions/gitflow_release/
     - name: ls5
       run: ls -a ~/.npm
