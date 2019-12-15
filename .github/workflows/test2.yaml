@@ -24,7 +24,7 @@ jobs:
       uses: actions/cache@v1
       with: 
         path: ~/.npm
-        key: ${{ runner.os }}-node-${{ hashFiles('$GITHUB_WORKSPACE/test-actions/actions/gitflow_release/package.json') }}
+        key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_release/package.json') }}
         restore-keys: |
           ${{ runner.os }}-node-
     - name: ls
