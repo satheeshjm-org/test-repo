@@ -6,8 +6,8 @@ on:
     types: 
       - closed
     branches: 
-      - ${{ env.STAGING_BRANCH }}
-      - ${{ env.PRODUCTION_BRANCH }}
+      - dev
+      - master
 jobs:
   create_release:
     name: Freshchat GitFlow
@@ -30,13 +30,13 @@ jobs:
         if: github.base_ref == env.STAGING_BRANCH
         uses: ./test-actions/actions/gitflow_stage/
         with:
-          production_branch: master 
-          staging_branch: dev
+          production_branch: ${{ env.PRODUCTION_BRANCH }}
+          staging_branch: ${{ env.STAGING_BRANCH }}
        
       - name: Release
         id: create_release
         if: github.base_ref == env.PRODUCTION_BRANCH
         uses: ./test-actions/actions/gitflow_release/
         with:
-          production_branch: master 
-          staging_branch: dev
+          production_branch: ${{ env.PRODUCTION_BRANCH }} 
+          staging_branch: ${{ env.STAGING_BRANCH }}
