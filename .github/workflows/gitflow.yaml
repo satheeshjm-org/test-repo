@@ -22,10 +22,18 @@ jobs:
       
       - name: t
         run: |
-          echo ${{ env.GITHUB_REF }}
-          echo ${{ env.GITHUB_HEAD_REF }}
-          echo ${{ env.GITHUB_BASE_REF }}
-          echo ${{ env.GITHUB_SHA }}
+          echo $GITHUB_REF
+          echo $GITHUB_HEAD_REF
+          echo $GITHUB_BASE_REF
+          echo $GITHUB_SHA
+          
+      - uses: rlespinasse/github-slug-action@master
+      - name: Print slug variables
+        run: |
+          echo ${{ env.GITHUB_REF_SLUG }}
+          echo ${{ env.GITHUB_HEAD_REF_SLUG }}
+          echo ${{ env.GITHUB_BASE_REF_SLUG }}
+          echo ${{ env.GITHUB_SHA_SHORT }}
         
 #      - name: Pre-Release
 #        id: pre_release
