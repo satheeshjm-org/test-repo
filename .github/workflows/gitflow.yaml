@@ -2,6 +2,7 @@ env:
   STAGING_BRANCH: dev
   PRODUCTION_BRANCH: master
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  RELEASETAG_REGEX: (\\d+\\.){3}\\d+
 on:
   pull_request:
     types: 
@@ -41,3 +42,4 @@ jobs:
         with:
           production_branch: ${{ env.PRODUCTION_BRANCH }} 
           staging_branch: ${{ env.STAGING_BRANCH }}
+          releasetag_regex: ${{ env.RELEASETAG_REGEX }}
