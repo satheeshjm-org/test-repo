@@ -24,19 +24,23 @@ jobs:
           token: ${{ github.token }}
           path: test-actions
        
-      - name: Install Dependencies
-        run: npm install --prefix ./test-actions/actions/gitflow_release/
-        
-      - name: Pre-Release
-        id: pre_release
+     
+      - name: Install Stage Dependencies
+        if: github.base_ref == env.STAGING_BRANCH
+        run: npm install --prefix ./test-actions/actions/gitflow_stage/
+      - name: Stage
+        id: gitflow_stage
         if: github.base_ref == env.STAGING_BRANCH
         uses: ./test-actions/actions/gitflow_stage/
         with:
           production_branch: ${{ env.PRODUCTION_BRANCH }}
           staging_branch: ${{ env.STAGING_BRANCH }}
        
+      - name: Install Release Dependencies
+        if: github.base_ref == env.PRODUCTION_BRANCH
+        run: npm install --prefix ./test-actions/actions/gitflow_release/
       - name: Release
-        id: create_release
+        id: gitflow_release
         if: github.base_ref == env.PRODUCTION_BRANCH
         uses: ./test-actions/actions/gitflow_release/
         with:
