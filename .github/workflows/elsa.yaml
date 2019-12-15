@@ -1,5 +1,7 @@
+name: Elsa
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  DISPLAY_NAME: Elsa
   CONFIG: >
     {
     "branches" : ["^master$"],
@@ -11,7 +13,6 @@ on:
       - created
 jobs:
   elsa:
-    name: Elsa
     runs-on: ubuntu-latest
     steps:
       - name: Checkout actions
