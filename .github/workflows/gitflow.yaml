@@ -2,7 +2,7 @@ env:
   STAGING_BRANCH: dev
   PRODUCTION_BRANCH: master
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  RELEASETAG_REGEX: (\\d+\\.){3}\\d+
+  RELEASETAG_REGEX: (\d+\.){3}\d+
 on:
   pull_request:
     types: 
