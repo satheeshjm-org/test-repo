@@ -32,8 +32,8 @@ jobs:
       run: ls -a ~/.npm
     - name: Install Dependencies
       if: steps.cache_node_modules.outputs.cache-hit != 'true'
-      run: npm install --prefix $GITHUB_WORKSPACE/test-actions/gitflow_release/
+      run: npm install --prefix test-actions/gitflow_release/
     - name: ls4
-      run: ls -a $GITHUB_WORKSPACE/test-actions/gitflow_release/
+      run: ls -a test-actions/gitflow_release/
     - name: ls5
       run: ls -a ~/.npm
