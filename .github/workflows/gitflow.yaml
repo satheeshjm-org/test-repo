@@ -6,8 +6,8 @@ on:
     types: 
       - closed
     branches: 
-      - master
-      - dev
+      - ${{ env.STAGING_BRANCH }}
+      - ${{ env.PRODUCTION_BRANCH }}
 jobs:
   create_release:
     name: Freshchat GitFlow
