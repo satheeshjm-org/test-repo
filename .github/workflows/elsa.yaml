@@ -3,7 +3,7 @@ env:
   CONFIG: >
     {
     "branches" : ["^master$"],
-    "persistence" : { "branch" : "elsa_data"}
+    "persistence" : { "branch" : "elsa_data", "file" : "elsa/data.json}
     }
 on:
   issue_comment:
