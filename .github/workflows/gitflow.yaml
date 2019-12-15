@@ -28,25 +28,19 @@ jobs:
           echo $GITHUB_HEAD_REF
           echo $GITHUB_BASE_REF
           echo $GITHUB_SHA
-          
-      - uses: rlespinasse/github-slug-action@master
-      - name: Print slug variables
-        run: |
-          echo ${{ env.GITHUB_REF_SLUG }}
-          echo ${{ env.GITHUB_HEAD_REF_SLUG }}
-          echo ${{ env.GITHUB_BASE_REF_SLUG }}
-          echo ${{ env.GITHUB_SHA_SHORT }}
         
-#      - name: Pre-Release
-#        id: pre_release
-#        uses: ./test-actions/actions/gitflow_release/
-#        with:
-#          production_branch: master 
-#          staging_branch: dev
-#        
-#      - name: Release
-#        id: create_release
-#        uses: ./test-actions/actions/gitflow_release/
-#        with:
-#          production_branch: master 
-#          staging_branch: dev
+      - name: Pre-Release
+        id: pre_release
+        if: $GITHUB_BASE_REF == 'dev'
+        uses: ./test-actions/actions/gitflow_stage/
+        with:
+          production_branch: master 
+          staging_branch: dev
+       
+      - name: Release
+        id: create_release
+        if: $GITHUB_BASE_REF == 'master'
+        uses: ./test-actions/actions/gitflow_release/
+        with:
+          production_branch: master 
+          staging_branch: dev
