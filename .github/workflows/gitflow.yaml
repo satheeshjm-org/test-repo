@@ -1,3 +1,6 @@
+env:
+  STAGING_BRANCH: dev
+  PRODUCTION_BRANCH: master
 on:
   pull_request:
     types: 
@@ -31,7 +34,7 @@ jobs:
         
       - name: Pre-Release
         id: pre_release
-        if: github.base_ref == 'dev'
+        if: github.base_ref == '$STAGING_BRANCH'
         uses: ./test-actions/actions/gitflow_stage/
         with:
           production_branch: master 
@@ -39,7 +42,7 @@ jobs:
        
       - name: Release
         id: create_release
-        if: github.base_ref == 'master'
+        if: github.base_ref == '$PRODUCTION_BRANCH'
         uses: ./test-actions/actions/gitflow_release/
         with:
           production_branch: master 
