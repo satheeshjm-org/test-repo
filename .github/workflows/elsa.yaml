@@ -3,7 +3,6 @@ env:
   CONFIG: >
     {
     "branches" : ["^master$"],
-    "teams_whitelisted" : [ "fc-qa", "fc-admins"],
     "persistence" : { "branch" : "elsa_data"}
     }
 on:
