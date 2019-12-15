@@ -34,4 +34,4 @@ jobs:
     - name: ls4
       run: ls -a .github/actions/create_release/
     - name: ls5
-      run: ls -a .github/actions/create_release/node_modules
+      run: ls -a ~/.npm
