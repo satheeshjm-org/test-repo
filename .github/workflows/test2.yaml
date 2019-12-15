@@ -12,35 +12,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Cache actions source
-      id: cache_actions_source
-      uses: actions/cache@v1
-      with:
-        path: test-actions
-        key: actions-${{ hashFiles('test-actions/actions/gitflow_release/index.js') }}
+#     - name: Cache actions source
+#       id: cache_actions_source
+#       uses: actions/cache@v1
+#       with:
+#         path: test-actions
+#         key: actions-${{ hashFiles('test-actions/actions/gitflow_release/index.js') }}
     - uses: actions/checkout@v2
-      if: steps.cache_actions_source.outputs.cache-hit != 'true'
+#       if: steps.cache_actions_source.outputs.cache-hit != 'true'
       with:
         repository: satheeshjm-org/test-actions
         ref: master
         fetch-depth: 1
         token: ${{ github.token }}
         path: test-actions
-    - name: Cache node modules
-      id: cache_node_modules
-      uses: actions/cache@v1
-      with: 
-        path: test-actions/actions/gitflow_release/node_modules
-        key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_release/package.json') }}
-        restore-keys: |
-          ${{ runner.os }}-node-
-    - name: ls
-      if: steps.cache_node_modules.outputs.cache-hit == 'true'
-      run: ls -a ~/.npm
+#     - name: Cache node modules
+#       id: cache_node_modules
+#       uses: actions/cache@v1
+#       with: 
+#         path: test-actions/actions/gitflow_release/node_modules
+#         key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_release/package.json') }}
+#         restore-keys: |
+#           ${{ runner.os }}-node-
     - name: Install Dependencies
-      if: steps.cache_node_modules.outputs.cache-hit != 'true'
+#       if: steps.cache_node_modules.outputs.cache-hit != 'true'
       run: npm install --prefix test-actions/actions/gitflow_release/
-    - name: ls4
-      run: ls -a test-actions/actions/gitflow_release/
-    - name: ls5
-      run: ls -a ~/.npm
