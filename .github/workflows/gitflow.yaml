@@ -31,7 +31,7 @@ jobs:
         
       - name: Pre-Release
         id: pre_release
-        if: $GITHUB_BASE_REF == 'dev'
+        if: ${{ env.GITHUB_BASE_REF }} == 'dev'
         uses: ./test-actions/actions/gitflow_stage/
         with:
           production_branch: master 
@@ -39,7 +39,7 @@ jobs:
        
       - name: Release
         id: create_release
-        if: $GITHUB_BASE_REF == 'master'
+        if: ${{ env.GITHUB_BASE_REF }} == 'master'
         uses: ./test-actions/actions/gitflow_release/
         with:
           production_branch: master 
