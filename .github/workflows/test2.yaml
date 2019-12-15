@@ -14,8 +14,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
+        repository: satheeshjm-org/test-actions
         ref: master
         fetch-depth: 1
+        token: ${{ github.token }}
     - name: Cache node modules
       id: cache_node_modules
       uses: actions/cache@v1
