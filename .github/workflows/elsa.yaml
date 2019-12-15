@@ -1,6 +1,6 @@
 env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CONFIG: |
+  CONFIG: >
     {
     "branches" : ["^master$"],
     "teams_whitelisted" : [ "fc-qa", "fc-admins"],
