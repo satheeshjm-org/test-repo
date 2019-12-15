@@ -1,0 +1,28 @@
+env:
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+on:
+  issue_comment:
+    types: 
+      - created
+jobs:
+  elsa:
+    name: Elsa
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout actions
+        uses: actions/checkout@v2
+        with:
+          repository: satheeshjm-org/test-actions
+          ref: master
+          fetch-depth: 1
+          token: ${{ github.token }}
+          path: test-actions
+       
+     
+      - name: Install Dependencies
+        if: github.base_ref == env.STAGING_BRANCH
+        run: npm install --prefix ./test-actions/actions/elsa/
+      - name: Elsa
+        id: elsa
+        uses: ./test-actions/actions/elsa/
+ 
