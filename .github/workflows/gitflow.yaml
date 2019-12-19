@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout actions
+        if: github.event.pull_request.merged
         uses: actions/checkout@v2
         with:
           repository: satheeshjm-org/test-actions
@@ -26,18 +27,18 @@ jobs:
        
      
       - name: Install Stage Dependencies
-        if: github.base_ref == env.STAGING_BRANCH
+        if: github.base_ref == env.STAGING_BRANCH && success()
         run: npm install --prefix ./test-actions/actions/gitflow_stage/
       - name: Stage
         id: gitflow_stage
-        if: github.base_ref == env.STAGING_BRANCH
+        if: github.base_ref == env.STAGING_BRANCH && success()
         uses: ./test-actions/actions/gitflow_stage/
         with:
           production_branch: ${{ env.PRODUCTION_BRANCH }}
           staging_branch: ${{ env.STAGING_BRANCH }}
           pr_body_config: >
             {
-              "table_fields" : 
+            "table_fields" : 
               [
                 {
                 "name" : "PR",
@@ -56,11 +57,11 @@ jobs:
             }
        
       - name: Install Release Dependencies
-        if: github.base_ref == env.PRODUCTION_BRANCH
+        if: github.base_ref == env.PRODUCTION_BRANCH && success()
         run: npm install --prefix ./test-actions/actions/gitflow_release/
       - name: Release
         id: gitflow_release
-        if: github.base_ref == env.PRODUCTION_BRANCH
+        if: github.base_ref == env.PRODUCTION_BRANCH && success()
         uses: ./test-actions/actions/gitflow_release/
         with:
           production_branch: ${{ env.PRODUCTION_BRANCH }} 
