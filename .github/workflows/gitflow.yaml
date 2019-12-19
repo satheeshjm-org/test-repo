@@ -40,19 +40,9 @@ jobs:
             {
             "table_fields" : 
               [
-                {
-                "name" : "PR",
-                "value": "pr"
-                },
-                {
-                "name" : "OWNER",
-                "value": "owner"
-                },
-                {
-                "name": "DDL",
-                "value": "file_extension_bool",
-                "extension" : "sql"
-                }
+                { "name" : "PR", "value": "pr"},
+                { "name" : "OWNER", "value": "owner"},
+                { "name" : "DDL", "value": "does_file_exist", "glob" : "**/*.sql"}
               ]
             }
        
