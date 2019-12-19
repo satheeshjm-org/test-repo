@@ -35,6 +35,25 @@ jobs:
         with:
           production_branch: ${{ env.PRODUCTION_BRANCH }}
           staging_branch: ${{ env.STAGING_BRANCH }}
+          pr_body_config: >
+            {
+              "table_fields" : 
+              [
+                {
+                "name" : "PR",
+                "value": "pr"
+                },
+                {
+                "name" : "OWNER",
+                "value": "owner"
+                },
+                {
+                "name": "DDL",
+                "value": "file_extension_bool",
+                "extension" : "sql"
+                }
+              ]
+            }
        
       - name: Install Release Dependencies
         if: github.base_ref == env.PRODUCTION_BRANCH
