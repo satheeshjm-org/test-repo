@@ -28,13 +28,13 @@ jobs:
         fetch-depth: 1
         token: ${{ github.token }}
         path: test-actions
-     - name: Cache node modules
-       id: cache_node_modules
-       uses: actions/cache@v1
-       with: 
-         path: test-actions/actions/gitflow_release/node_modules
-         key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_release/package.json') }}
-         restore-keys: |
+    - name: Cache node modules
+      id: cache_node_modules
+      uses: actions/cache@v1
+      with: 
+        path: test-actions/actions/gitflow_release/node_modules
+        key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_release/package.json') }}
+        restore-keys: |
            ${{ runner.os }}-node-
     - name: Install Dependencies
       if: steps.cache_node_modules.outputs.cache-hit != 'true'
