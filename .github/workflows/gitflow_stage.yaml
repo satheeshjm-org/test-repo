@@ -36,6 +36,7 @@ jobs:
               [
                 { "name" : "PR", "value": "pr"},
                 { "name" : "OWNER", "value": "owner"},
-                { "name" : "DDL", "value": "does_file_exist", "glob" : "**/*.sql"}
+                { "name" : "DDL", "value": "does_file_exist", "glob" : "**/*.sql"},
+                { "name" : "PROPS", "value": "does_file_contain", "pattern" : "\"${[A-Za-z0-9_]+}\""}
               ]
             }
