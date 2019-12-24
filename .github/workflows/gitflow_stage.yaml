@@ -6,7 +6,7 @@ env:
 on:
   push:
     branches: 
-      - refs/head/dev
+      - 'dev'
 jobs:
   create_release:
     name: Freshchat GitFlow
