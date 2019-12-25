@@ -1,4 +1,4 @@
-name: gitflow_stage
+name: Gitflow Stage
 env:
   STAGING_BRANCH: dev
   PRODUCTION_BRANCH: master
@@ -9,7 +9,7 @@ on:
       - 'dev'
 jobs:
   create_release:
-    name: Freshchat GitFlow
+    name: Create Dev To Master PR 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout actions
@@ -21,9 +21,15 @@ jobs:
           token: ${{ github.token }}
           path: test-actions
        
-     
+      - name: Cache node modules
+        id: cache_node_modules
+        uses: actions/cache@v1
+        with: 
+          path: test-actions/actions/gitflow_stage/node_modules
+          key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_stage/package.json') }}
       - name: Install Stage Dependencies
         run: npm install --prefix ./test-actions/actions/gitflow_stage/
+        
       - name: Stage
         id: gitflow_stage
         uses: ./test-actions/actions/gitflow_stage/
