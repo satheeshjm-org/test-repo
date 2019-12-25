@@ -21,13 +21,15 @@ jobs:
           token: ${{ github.token }}
           path: test-actions
        
+
       - name: Cache node modules
         id: cache_node_modules
         uses: actions/cache@v1
         with: 
           path: test-actions/actions/gitflow_stage/node_modules
-          key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_stage/package.json') }}
+          key: ${{ runner.os }}-node-${{ hashFiles('test-actions/actions/gitflow_stage/package-lock.json') }}
       - name: Install Stage Dependencies
+        if: steps.cache_node_modules.outputs.cache-hit != 'true'
         run: npm install --prefix ./test-actions/actions/gitflow_stage/
         
       - name: Stage
