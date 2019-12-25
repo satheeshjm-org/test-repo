@@ -1,2 +1,7 @@
 asdad
-"${TEST}"
+"${TEST2}"
+
+"${BOO}"
+
+
+"${HELLO}"
