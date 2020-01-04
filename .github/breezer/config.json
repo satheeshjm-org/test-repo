@@ -1,7 +1,0 @@
-{
-  "branches" : ["^master$"],
-  "teams_whitelisted" : [ "fc-qa", "fc-admins"],
-  "persistence" : {
-    "branch" : "breezer_data"
-  }
-}
