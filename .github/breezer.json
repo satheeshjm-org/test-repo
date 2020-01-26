@@ -19,11 +19,11 @@
   ],
   "_data": {
     "master": {
-      "frozen": true,
-      "frozen_at": "2020-01-26T14:15:31Z",
-      "frozen_by": "SatheeshJM",
-      "unfrozen_at": null,
-      "unfrozen_by": null
+      "frozen": false,
+      "frozen_at": null,
+      "frozen_by": null,
+      "unfrozen_at": "2020-01-26T14:19:20Z",
+      "unfrozen_by": "SatheeshJM"
     }
   }
 }
