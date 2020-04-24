@@ -4,7 +4,7 @@ with open("README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
-    name="fw-statsd-telegraf", # Replace with your own username
+    name="statsd-telegraf", # Replace with your own username
     version="0.0.1",
     author="Satheesh JM",
     author_email="satheesh.maheshkumar@freshworks.com",
