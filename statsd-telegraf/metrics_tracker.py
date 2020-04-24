@@ -22,35 +22,18 @@ This forked version doesn't seem to have pulled in latest changes from the origi
 TODO: fork the repo into a Freshworks' repository and extend the library to include tags (extending shouldn't be too hard)
 """
 
-
-import newrelic.agent
-import constants
 import logging
 from statsd import StatsClient
 import time
 
-is_telegraf_enabled = constants.TELEGRAF_ENABLED
-telegraf_host = constants.TELEGRAF_HOST
-telegraf_port = constants.TELEGRAF_PORT
 statsd_client = None
+initialized = None
 
 
 def get_metrics_client():
+    return statsd_client
 
-    global statsd_client
-    if statsd_client:
-        return statsd_client
 
-    try:
-        statsd_client = FreddyStatsClient(
-            host=telegraf_host,
-            port=telegraf_port,
-            prefix="freddy.mlserv"
-        )
-        return statsd_client
-    except Exception as e:
-        logging.error('StatsD initialization error', e)
-        newrelic.agent.record_exception()
 
 
 
@@ -59,11 +42,19 @@ def get_metrics_client():
 a wrapper around the get_metrics_client which raises an error if there is no client
 useful for identifying any issues during application startup 
 """
-def init():
+def init(host="localhost", port=8125, prefix = "freddy"):
+    if initialized: return
+    
     global statsd_client
-    statsd_client = get_metrics_client()
-    if not statsd_client:
-        raise ConnectionError
+    global initialized
+
+    #its okay if it erros out during init, since init is supposed to be called at application startup
+    statsd_client = FreddyStatsClient(
+        host=host,
+        port=port,
+        prefix=prefix
+    )
+    initialized = True
 
 
 
@@ -80,7 +71,7 @@ class FreddyStatsClient(StatsClient):
         def wrapper(*args, **kwargs):
             try:
                 #we don't want to execute the metrics functions if telegraf is disabled
-                if not is_telegraf_enabled: return
+                if not initialized: return
                 return func(*args, **kwargs)
             except Exception as e:
                 logging.error("Error in a statsD function",e)
@@ -112,7 +103,7 @@ class FreddyStatsClient(StatsClient):
 
 
     def __init__(self, host='localhost', port=8125, prefix=None, maxudpsize=512, ipv6=False):
-        if not is_telegraf_enabled: return
+        if not initialized: return
         super().__init__(host, port, prefix, maxudpsize, ipv6)
 
 
@@ -124,7 +115,7 @@ TODO: need to report cortex_id for these as well
 def gauge_execution_time(*args, **kwarg):
     metric_name = "perf_" + args[0]
     def decorator(func):
-        if not is_telegraf_enabled: return func
+        if not initialized: return func
         def wrapper(*args, **kwargs):
             start_time = time.time()
             try:
