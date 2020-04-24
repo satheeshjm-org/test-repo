@@ -1,6 +1,6 @@
 import setuptools
 
-with open("statsd-telegraf/README.md", "r") as fh:
+with open("system42-python-libs/statsd-telegraf/README.md", "r") as fh:
     long_description = fh.read()
 
 setuptools.setup(
