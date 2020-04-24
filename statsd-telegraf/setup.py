@@ -9,7 +9,7 @@ setuptools.setup(
     author="Satheesh JM",
     author_email="satheesh.maheshkumar@freshworks.com",
     description="A telegraf client which reports time series data using statsd.",
-    long_description="",
+    long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/freshdesk/system42-python-packages/tree/master/statsd-telegraf",
     packages=setuptools.find_packages(),
@@ -19,4 +19,7 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     python_requires='>=3.6',
+    install_requires = [
+        'statsd-telegraf==3.2.1.post1'
+    ]
 )
