@@ -12,7 +12,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/freshdesk/system42-python-packages/tree/master/statsd-telegraf",
-    packages=["sstatsd-telegraf"],
+    packages=["statsd-telegraf"],
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
