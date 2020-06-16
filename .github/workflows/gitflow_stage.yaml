@@ -47,6 +47,7 @@ jobs:
             "table_fields" : 
               [
                 { "name" : "PR", "value": "pr"},
-                { "name" : "OWNER", "value": "owner"}
+                { "name" : "OWNER", "value": "owner"},
+                { "name" : "PR_TYPE", "value": "title_regex", "pattern" : "^\\[(?:bug|enhancement|hotfix)\\]\\[FC\\-\\d+\\].*$"}
               ]
             }
