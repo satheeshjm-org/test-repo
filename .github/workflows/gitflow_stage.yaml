@@ -45,8 +45,8 @@ jobs:
           pr_body_config: >
             {
             "table_fields" : 
-              [
-                { "name" : "TYPE", "value": "title_regex", "pattern" : "^\\[(?:bug|enhancement|hotfix)\\]\\[FC\\-\\d+\\].*$"},
+              [ 
+                { "name" : "TYPE", "value": "type",
                 { "name" : "PR", "value": "pr"},
                 { "name" : "OWNER", "value": "owner"}
               ]
