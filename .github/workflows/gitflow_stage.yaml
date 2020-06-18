@@ -46,7 +46,7 @@ jobs:
             {
             "table_fields" : 
               [ 
-                { "name" : "TYPE", "value": "type",
+                { "name" : "TYPE", "value": "type"},
                 { "name" : "PR", "value": "pr"},
                 { "name" : "OWNER", "value": "owner"}
               ]
