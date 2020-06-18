@@ -13,17 +13,26 @@
         ]
       },
       {
-        "from_branch" : "^(?!.*master).*$",
-        "to_branch" : "dev",
+        "from_branch" : "^(?!master).*$",
+        "to_branch" : "^dev$",
         "description" : "feature branch (non-master) to dev",
-        "validation_type" : "label",
-        "mandatory_labels" : [
-          ["developer-tested"],
-          ["qa-branch-signoff"]
-        ],
-        "override_labels" : [
-          "admin-override"
-        ]
+        "validations" : [
+        {
+            "type" : "label",
+            "mandatory_labels" : [
+              ["developer-tested"],
+              ["qa-branch-signoff"]
+            ],
+            "override_labels" : [
+              "admin-override",
+              "qa-branch-noimpact"
+            ]
+        },
+        {
+            "type" : "title",
+            "regex" : "^\\[(?:bug|feat|improvements|hotfix|refactor|perf|build|chore|revert|major|docs|test|other)\\]\\[FC\\-\\d+\\]\\:.*$",
+            "failure_message" : "Expected Title Format : [type][FC-xxxx]: pr_title_here "
+        }]
       },
       {
         "from_branch" : "dev",
