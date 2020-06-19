@@ -46,21 +46,7 @@ jobs:
             {
             "table_fields" : 
               [ 
-                { "name" : "TYPE", "value": "type","patterns" : {
-                    "^\[bug\].*$"  : ":bug: Bug fixes",
-                    "^\[feat\].*$"  : ":sparkles: Feature",
-                    "^\[improvements\].*$"  : ":zap: Enhancements",
-                    "^\[hotfix\].*$"  : ":ambulance: hot-fix",
-                    "^\[refactor\].*$"  : ":hammer: Code refactor",
-                    "^\[perf\].*$"  : ":racehorse: Performance",
-                    "^\[build\].*$"  : ":construction_worker: changes only affect build system",
-                    "^\[chore\].*$"  : ":zap: Other changes don't modify src or test files",
-                    "^\[revert\].*$"  : ":rewind: Code revert",
-                    "^\[major\].*$"  : ":boom: Major release",
-                    "^\[other\].*$"  : ":ok_hand: others",
-                    "^\[docs\].*$"  : ":books: document work",
-                    "^\[test\].*$"  : ":rotating_light: test case"
-                }},
+                { "name" : "TYPE", "value": "type","patterns" : {"^\[bug\].*$"  : ":bug: Bug fixes","^\[feat\].*$"  : ":sparkles: Feature","^\[improvements\].*$"  : ":zap: Enhancements","^\[hotfix\].*$"  : ":ambulance: hot-fix","^\[refactor\].*$"  : ":hammer: Code refactor","^\[perf\].*$"  : ":racehorse: Performance","^\[build\].*$"  : ":construction_worker: changes only affect build system","^\[chore\].*$"  : ":zap: Other changes don't modify src or test files","^\[revert\].*$"  : ":rewind: Code revert","^\[major\].*$"  : ":boom: Major release","^\[other\].*$"  : ":ok_hand: others","^\[docs\].*$"  : ":books: document work","^\[test\].*$"  : ":rotating_light: test case"}},
                 { "name" : "PR", "value": "title"},
                 { "name" : "OWNER", "value": "owner"}
               ],
