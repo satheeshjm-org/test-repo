@@ -47,7 +47,7 @@ jobs:
             "table_fields" : 
               [ 
                 { "name" : "TYPE", "value": "type","patterns" : {
-                     "^\\[bug\\].*$"  : ":bug: Bug fixes",
+                    "^\\[bug\\].*$"  : ":bug: Bug fixes",
                     "^\\[feat\\].*$"  : ":sparkles: Feature",
                     "^\\[improvements\\].*$"  : ":zap: Enhancements",
                     "^\\[hotfix\\].*$"  : ":ambulance: hot-fix",
