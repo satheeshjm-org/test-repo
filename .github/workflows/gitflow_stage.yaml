@@ -62,7 +62,7 @@ jobs:
                     "^\\[test\\].*$"  : ":rotating_light: test case"
                   }
                 },
-                { "name" : "PR", "value": "title"},
+                { "name" : "PR", "value": "pr"},
                 { "name" : "OWNER", "value": "owner"}
               ]
             }
