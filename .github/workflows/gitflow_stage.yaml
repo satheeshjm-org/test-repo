@@ -58,7 +58,7 @@ jobs:
                     "^\[revert\].*$"  : ":rewind: Code revert",
                     "^\[major\].*$"  : ":boom: Major release",
                     "^\[other\].*$"  : ":ok_hand: others",
-                    "^\[docs\].*$"  : ":books: document work"
+                    "^\[docs\].*$"  : ":books: document work",
                     "^\[test\].*$"  : ":rotating_light: test case"
                 }},
                 { "name" : "PR", "value": "title"},
