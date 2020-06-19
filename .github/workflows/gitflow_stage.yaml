@@ -64,5 +64,5 @@ jobs:
                 },
                 { "name" : "PR", "value": "title"},
                 { "name" : "OWNER", "value": "owner"}
-              ],
+              ]
             }
