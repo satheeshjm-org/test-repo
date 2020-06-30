@@ -19,6 +19,7 @@
         "validations" : [
         {
             "type" : "title",
+            "ignoreCase": true,
             "regex" : "^\\[(?:bug|feat|improvements|hotfix|refactor|perf|build|chore|revert|major|docs|test|other)\\]\\[FC\\-\\d+\\]\\:.*$",
             "failure_message" : "Expected Title Format : [type][FC-xxxx]: pr_title_here "
         }]
