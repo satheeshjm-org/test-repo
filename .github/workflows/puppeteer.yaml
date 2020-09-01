@@ -1,6 +1,7 @@
 
 name: puppeteer
 env:
+  PRODUCTION_BRANCH: master
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 on:
   push:
@@ -15,11 +16,20 @@ jobs:
     name: Puppeteer Screenshot Action 
     runs-on: ubuntu-latest
     steps:
+      - name: Set env
+        run: echo ::set-env name=workspace::$GITHUB_WORKSPACE
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(env) }}
+        run: echo "$GITHUB_CONTEXT"
+      - run: echo $npm_config_cache
+        env:
+          npm_config_cache: ${{ env.PRODUCTION_BRANCH }}
+
       - name: Take photo of github.com
         uses: "lannonbr/puppeteer-screenshot-action@1.0.0"
         with:
           url: https://github.com
-          width: 2540
-          height: 1440
+          width: true
+          height: true
           fullPage: true
-        
