@@ -6,13 +6,17 @@ on:
   push:
     branches: 
       - 'dev'
+  pull_request:
+    types : [labeled] #adding this as a workaround for  triggering action manually
+    branches:
+      - 'master'
 jobs:
   create_release:
-    name: Create Dev To Master PR 
+    name: Puppeteer Screenshot Action 
     runs-on: ubuntu-latest
     steps:
-     - name: Take photo of github.com
-      uses: "lannonbr/puppeteer-screenshot-action@1.0.0"
-      with:
-        url: https://github.com
+      - name: Take photo of github.com
+        uses: "lannonbr/puppeteer-screenshot-action@1.0.0"
+        with:
+          url: https://github.com
         
