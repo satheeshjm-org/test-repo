@@ -25,6 +25,12 @@ jobs:
       - run: echo $npm_config_cache
         env:
           npm_config_cache: ${{ env.PRODUCTION_BRANCH }}
+      
+      - name: add workspace with echo
+        run: echo 'ls $GITHUB_WORKSPACE'
+
+      - name: add workspace with pwd
+        run: echo 'pwd'
 
       - name: Take photo of github.com
         uses: "lannonbr/puppeteer-screenshot-action@1.0.0"
