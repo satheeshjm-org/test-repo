@@ -64,5 +64,8 @@ jobs:
                 },
                 { "name" : "PR", "value": "pr"},
                 { "name" : "OWNER", "value": "owner"}
-              ]
+              ],
+              "metrics" : [ { "name" : "FCP", "value": "fcp"},
+              { "name" : "LCP", "value": "lcp"},
+              { "name" : "TTI", "value": "tti"}]
             }
