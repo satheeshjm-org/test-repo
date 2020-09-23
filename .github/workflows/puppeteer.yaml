@@ -40,8 +40,8 @@ jobs:
           height: true
           fullPage: true
 
-      - name: Comment PR
-        uses: thollander/actions-comment-pull-request@master
+      - name: Puppeteer
+        uses: riskledger/update-pr-description@dev
         with:
-          message: 'Example of message !'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          body: "MESSAGE" # The text you wish to overwrite your Pull Request description with, can be a variable or a string
+          token: ${{ secrets.GITHUB_TOKEN }}
