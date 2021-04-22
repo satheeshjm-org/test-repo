@@ -9,6 +9,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
+      - run: env
       - run: echo $ACTIONS_RUNTIME_TOKEN
       - run: echo "boo" > temp.txt
       - uses: actions/upload-artifact@v2
