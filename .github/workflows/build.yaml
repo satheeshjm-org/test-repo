@@ -6,20 +6,27 @@ on:
       - master
 jobs:
   build:
-    name: Build
+    name: ${{ matrix.name }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: one
+          - name: two
+      max-parallel: 2
     steps:
-      - run: env
-      - run: echo $ACTIONS_RUNTIME_TOKEN
+#       - run: env
+#       - run: echo $ACTIONS_RUNTIME_TOKEN
       - run: echo "boo" > temp.txt
       - uses: actions/upload-artifact@v2
         with:
           name: temp.txt
           path: temp.txt
-      - uses: actions/download-artifact@v2
-        with:
-          name: temp.txt
-      - run: npm install @actions/artifact
-      - run: echo "require('@actions/artifact').create().downloadArtifact('temp.txt', '', {});" > test.js
-      - run: cat test.js
-      - run: node test.js
+#       - uses: actions/download-artifact@v2
+#         with:
+#           name: temp.txt
+#       - run: npm install @actions/artifact
+#       - run: echo "require('@actions/artifact').create().downloadArtifact('temp.txt', '', {});" > test.js
+#       - run: cat test.js
+#       - run: node test.js
