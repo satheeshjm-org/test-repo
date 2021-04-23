@@ -22,7 +22,7 @@ jobs:
         with:
           name: temp
           path: temp.txt
-      - uses: satheeshjm-org/download-artifact@v2
+      - uses: satheeshjm-org/download-artifact@v3
         with:
           name: temp_boo
           retry: true
