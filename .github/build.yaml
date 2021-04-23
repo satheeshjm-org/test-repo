@@ -1,0 +1,25 @@
+name: Test reports
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    strategy: 
+      fail-fast: false
+      matrix:
+        include:
+          - name: one
+          - name: two
+      max-parallel: 2
+    name: "${{ matrix.name }}
+    steps:
+      - run: echo "boo" > temp.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: ${{ github.job }}
+          path: temp.txt
+
