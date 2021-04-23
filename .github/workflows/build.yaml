@@ -1,0 +1,53 @@
+name: Test Launch
+on:
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 10
+      - run: echo "boo" > temp.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: temp
+          path: temp.txt
+      
+  build:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: one
+      max-parallel: 2
+    steps:
+#       - run: env
+#       - run: echo $ACTIONS_RUNTIME_TOKEN
+      - uses: satheeshjm-org/download-artifact@v3
+        with:
+          name: temp
+          retry: true
+          retry_timeout: 20
+          retry_interval: 2
+#       - run: npm install @actions/artifact
+#       - run: echo "require('@actions/artifact').create().downloadArtifact('temp.txt', '', {});" > test.js
+#       - run: cat test.js
+#       - run: node test.js
+
+#   publish-test-results:
+#     runs-on: ubuntu-latest
+#     name: "Publish Unit Tests Results"
+#     needs: build
+#     if: success() || failure()
+#     steps:
+#       - name: Download Artifacts
+#         uses: actions/download-artifact@v2
+#         with:
+#           path: artifacts
+#       - run: ls artifacts
+#       - run: ls artifacts/one
+#       - run: ls artifacts/two
