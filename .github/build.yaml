@@ -1,0 +1,25 @@
+name: Test Reports
+on: 
+  pull_request:
+    types: [opened, reopened, synchronize]
+    branches:
+      - master
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - run: env
+      - run: echo $ACTIONS_RUNTIME_TOKEN
+      - run: echo "boo" > temp.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: temp.txt
+          path: temp.txt
+      - uses: actions/download-artifact@v3
+        with:
+          name: temp.txt
+      - run: npm install @actions/artifact
+      - run: echo "require('@actions/artifact').create().downloadArtifact('temp.txt', '', {});" > test.js
+      - run: cat test.js
+      - run: node test.js
