@@ -42,5 +42,5 @@ jobs:
         with:
           path: artifacts
       - run: ls artifacts
-      - run: cat artifacts/one
-      - run: cat artifacts/two
+      - run: ls artifacts/one
+      - run: ls artifacts/two
