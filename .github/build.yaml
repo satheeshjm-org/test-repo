@@ -1,4 +1,4 @@
-name: Test Launch
+name: Test reports
 on:
   pull_request:
     types: [opened, reopened, synchronize]
