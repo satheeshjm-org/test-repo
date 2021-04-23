@@ -16,7 +16,7 @@ jobs:
         with:
           name: temp.txt
           path: temp.txt
-      - uses: actions/download-artifact@v2
+      - uses: actions/download-artifact@v3
         with:
           name: temp.txt
       - run: npm install @actions/artifact
