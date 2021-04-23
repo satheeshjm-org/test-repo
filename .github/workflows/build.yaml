@@ -26,6 +26,7 @@ jobs:
         with:
           name: temp_boo
           retry: true
+          retry_timeout: 20
 #       - run: npm install @actions/artifact
 #       - run: echo "require('@actions/artifact').create().downloadArtifact('temp.txt', '', {});" > test.js
 #       - run: cat test.js
