@@ -1,4 +1,4 @@
-name: Test reports
+name: Test Launch
 on:
   pull_request:
     types: [opened, reopened, synchronize]
@@ -6,12 +6,11 @@ on:
       - master
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
-    name: "hi"
     steps:
       - run: echo "boo" > temp.txt
       - uses: actions/upload-artifact@v2
         with:
-          name: temp
+          name: temp.txt
           path: temp.txt
-
