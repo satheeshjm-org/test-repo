@@ -5,6 +5,16 @@ on:
     branches:
       - master
 jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sleep 10
+      - run: echo "boo" > temp.txt
+      - uses: actions/upload-artifact@v2
+        with:
+          name: temp
+          path: temp.txt
+      
   build:
     name: ${{ matrix.name }}
     runs-on: ubuntu-latest
@@ -17,16 +27,12 @@ jobs:
     steps:
 #       - run: env
 #       - run: echo $ACTIONS_RUNTIME_TOKEN
-      - run: echo "boo" > temp.txt
-      - uses: actions/upload-artifact@v2
-        with:
-          name: temp
-          path: temp.txt
       - uses: satheeshjm-org/download-artifact@v3
         with:
-          name: temp_boo
+          name: temp
           retry: true
           retry_timeout: 20
+          retry_interval: 2
 #       - run: npm install @actions/artifact
 #       - run: echo "require('@actions/artifact').create().downloadArtifact('temp.txt', '', {});" > test.js
 #       - run: cat test.js
