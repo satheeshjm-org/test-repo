@@ -15,7 +15,7 @@ jobs:
           - name: one
           - name: two
       max-parallel: 2
-    name: "${{ matrix.name }}
+    name: "${{ matrix.name }}"
     steps:
       - run: echo "boo" > temp.txt
       - uses: actions/upload-artifact@v2
