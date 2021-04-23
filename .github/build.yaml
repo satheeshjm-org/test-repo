@@ -12,6 +12,6 @@ jobs:
       - run: echo "boo" > temp.txt
       - uses: actions/upload-artifact@v2
         with:
-          name: ${{ github.job }}
+          name: temp
           path: temp.txt
 
